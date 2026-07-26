@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insight Academy — Online Classes for Class 12 | Learn Today, Lead Tomorrow</title>
+<meta name="description" content="Insight Academy offers concept-based online classes for Class 12 — History, Political Science, English, Teaching Aptitude — plus CUET, CUSB, Jamia & NCET entrance prep. Monday–Friday on Google Meet.">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMwRDJDNkMiLz4KICA8dGV4dCB4PSIzMiIgeT0iNDEiIGZvbnQtZmFtaWx5PSJQb3BwaW5zLCBBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iI0YwQzY0QSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+SUE8L3RleHQ+Cjwvc3ZnPg==" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ==========================================================================
+   Insight Academy — stylesheet
+   Palette: Navy #0D2C6C · Gold #D4A017 · White · Light Gray
+   Font: Poppins
+   Mobile-first, vanilla CSS, no framework.
+   ========================================================================== */
+
+:root {
+  --navy: #0d2c6c;
+  --navy-deep: #081b47;
+  --gold: #d4a017;
+  --gold-light: #f0c64a;
+  --white: #ffffff;
+  --light-gray: #f4f6fa;
+  --text: #1b2537;
+  --muted: #5b6b85;
+  --border: #e3e8f2;
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(13, 44, 108, 0.08);
+  --shadow-lg: 0 20px 50px rgba(13, 44, 108, 0.14);
+  --max: 1120px;
+}
+
+/* ---------- Reset ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--text);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+.container { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+
+/* ---------- Icons ---------- */
+.icon {
+  width: 22px; height: 22px;
+  fill: none; stroke: currentColor; stroke-width: 1.8;
+  stroke-linecap: round; stroke-linejoin: round;
+  flex-shrink: 0;
+}
+.icon-lg { width: 30px; height: 30px; color: var(--gold); }
+
+/* ---------- Fade-in on scroll (CSS only transition, JS toggles class) ---------- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ==========================================================================
+   Header / Navigation
+   ========================================================================== */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 68px;
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-mark {
+  width: 40px; height: 40px; border-radius: 10px;
+  background: linear-gradient(155deg, var(--navy), var(--navy-deep));
+  color: var(--gold-light);
+  font-weight: 700; font-size: 15px;
+  display: flex; align-items: center; justify-content: center;
+}
+.brand-text { display: flex; flex-direction: column; line-height: 1.2; }
+.brand-text strong { font-size: 15px; color: var(--navy); }
+.brand-text em { font-size: 10px; font-style: normal; color: var(--gold); letter-spacing: .03em; }
+
+.nav-toggle {
+  display: flex; flex-direction: column; justify-content: center; gap: 5px;
+  width: 38px; height: 38px; background: none; border: none; cursor: pointer;
+}
+.nav-toggle span { width: 100%; height: 2px; background: var(--navy); border-radius: 2px; transition: transform .25s ease, opacity .25s ease; }
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.site-nav {
+  position: absolute; top: 68px; left: 0; right: 0;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  display: flex; flex-direction: column; padding: 8px 20px 16px;
+  max-height: 0; overflow: hidden; transition: max-height .3s ease;
+}
+.site-nav.open { max-height: 400px; }
+.site-nav a { padding: 12px 4px; font-size: 14.5px; font-weight: 500; color: var(--text); border-bottom: 1px solid var(--border); }
+.site-nav a:last-child { border-bottom: none; }
+.nav-cta {
+  margin-top: 8px; text-align: center;
+  background: var(--gold); color: var(--navy-deep) !important;
+  border-radius: 10px; font-weight: 600 !important;
+}
+
+@media (min-width: 860px) {
+  .nav-toggle { display: none; }
+  .site-nav {
+    position: static; max-height: none; overflow: visible;
+    flex-direction: row; align-items: center; gap: 28px;
+    padding: 0; border-bottom: none; background: none;
+  }
+  .site-nav a { border-bottom: none; padding: 6px 0; position: relative; }
+  .site-nav a:not(.nav-cta)::after {
+    content: ""; position: absolute; left: 0; bottom: -2px; width: 0; height: 2px;
+    background: var(--gold); transition: width .25s ease;
+  }
+  .site-nav a:not(.nav-cta):hover::after { width: 100%; }
+  .nav-cta { margin-top: 0; padding: 9px 18px; }
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+.hero {
+  background: linear-gradient(160deg, var(--navy) 0%, var(--navy-deep) 100%);
+  color: var(--white);
+  padding: 64px 0 56px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 80% 0%, rgba(212,160,23,.18), transparent 55%);
+  pointer-events: none;
+}
+.hero-inner { position: relative; }
+.eyebrow {
+  font-size: 12.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--gold-light); margin-bottom: 14px;
+}
+.hero h1 { font-size: clamp(28px, 7vw, 46px); font-weight: 700; line-height: 1.15; margin-bottom: 14px; }
+.hero h1 span { color: var(--gold-light); }
+.hero-sub { font-size: 15.5px; color: rgba(255,255,255,.85); max-width: 480px; margin: 0 auto 28px; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-bottom: 22px; }
+.hero-founder { font-size: 13px; color: rgba(255,255,255,.7); }
+.hero-founder strong { color: var(--gold-light); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 26px; border-radius: 12px;
+  font-weight: 600; font-size: 14.5px;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.btn-gold { background: var(--gold); color: var(--navy-deep); box-shadow: 0 10px 24px rgba(212,160,23,.35); }
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+.btn-outline { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,.5); }
+.btn-outline:hover { background: rgba(255,255,255,.1); transform: translateY(-2px); }
+
+/* ==========================================================================
+   Sections (shared)
+   ========================================================================== */
+.section { padding: 60px 0; }
+.section.alt { background: var(--light-gray); }
+.section-tag {
+  font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 8px;
+}
+.section h2 { font-size: clamp(22px, 4.5vw, 30px); font-weight: 700; color: var(--navy); margin-bottom: 14px; }
+.section-lead { font-size: 15px; color: var(--muted); max-width: 620px; }
+
+/* ---------- Grid & Cards ---------- */
+.grid { display: grid; gap: 18px; margin-top: 30px; }
+.grid-3 { grid-template-columns: 1fr; }
+.grid-4 { grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 640px) { .grid-3 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 860px) {
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 22px;
+  box-shadow: var(--shadow);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+.card h3 { font-size: 16.5px; color: var(--navy); margin: 14px 0 6px; }
+.card p { font-size: 13.5px; color: var(--muted); }
+
+.pill-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 14px;
+  text-align: center;
+  font-weight: 600; font-size: 14px; color: var(--navy);
+  box-shadow: var(--shadow);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.pill-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.pill-card-gold { border-color: rgba(212,160,23,.35); }
+.pill-card-gold::before { content: "🎓 "; }
+
+/* ---------- Schedule ---------- */
+.schedule-card {
+  display: flex; flex-direction: column; gap: 24px;
+  background: linear-gradient(155deg, var(--navy), var(--navy-deep));
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: 32px 26px;
+  box-shadow: var(--shadow-lg);
+}
+.schedule-item { display: flex; align-items: center; gap: 16px; }
+.schedule-label { font-size: 12px; color: rgba(255,255,255,.65); text-transform: uppercase; letter-spacing: .08em; }
+.schedule-value { font-size: 18px; font-weight: 600; }
+.schedule-divider { height: 1px; background: rgba(255,255,255,.15); }
+
+@media (min-width: 640px) {
+  .schedule-card { flex-direction: row; align-items: center; justify-content: space-around; }
+  .schedule-divider { width: 1px; height: 48px; }
+}
+
+/* ---------- Why Choose Us checklist ---------- */
+.check-list { display: grid; gap: 14px; margin-top: 26px; max-width: 480px; }
+.check-list li {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 14.5px; font-weight: 500; color: var(--text);
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px 16px;
+  box-shadow: var(--shadow);
+}
+.check-list .icon { color: var(--gold); background: rgba(212,160,23,.12); border-radius: 50%; padding: 3px; width: 24px; height: 24px; }
+
+/* ---------- Mentor ---------- */
+.mentor-card {
+  display: flex; align-items: center; gap: 20px; margin-top: 24px;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow);
+  max-width: 480px;
+}
+.mentor-avatar {
+  width: 64px; height: 64px; border-radius: 50%; flex-shrink: 0;
+  background: linear-gradient(155deg, var(--navy), var(--navy-deep));
+  color: var(--gold-light); font-weight: 700; font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+}
+.mentor-card h3 { color: var(--navy); font-size: 17px; margin-bottom: 4px; }
+.mentor-card p { color: var(--muted); font-size: 13.5px; }
+
+/* ---------- Contact ---------- */
+.contact-inner { text-align: center; }
+.contact-inner .section-lead { margin: 0 auto 20px; }
+.contact-phone {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  font-size: 19px; font-weight: 600; color: var(--navy); margin-bottom: 24px;
+}
+.contact-phone .icon { color: var(--gold); }
+.contact-inner .btn-outline { color: var(--navy); border-color: var(--navy); }
+.contact-inner .btn-outline:hover { background: var(--navy); color: var(--white); }
+.contact-inner .hero-actions { justify-content: center; }
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+  background: var(--navy-deep); color: rgba(255,255,255,.8);
+  text-align: center; padding: 36px 0;
+}
+.footer-brand { font-size: 18px; font-weight: 700; color: var(--white); }
+.footer-tagline { font-size: 13px; color: var(--gold-light); margin: 4px 0 14px; }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,.5); }
+
+/* ---------- Floating WhatsApp button ---------- */
+.float-whatsapp {
+  position: fixed; right: 18px; bottom: 18px; z-index: 200;
+  width: 54px; height: 54px; border-radius: 50%;
+  background: #25d366; color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 10px 24px rgba(37,211,102,.45);
+  transition: transform .2s ease;
+}
+.float-whatsapp:hover { transform: scale(1.08); }
+.float-whatsapp .icon { width: 26px; height: 26px; }
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fade-in, .card, .pill-card, .btn, .float-whatsapp { transition: none; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============ SVG ICON SPRITE (inline, no external icon font) ============ -->
+<svg style="display:none">
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 4h7a3 3 0 0 1 3 3v13a2.5 2.5 0 0 0-2.5-1.5H4V4Z"/><path d="M20 4h-7a3 3 0 0 0-3 3v13a2.5 2.5 0 0 1 2.5-1.5H20V4Z"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4.4 3.6-7 8-7s8 2.6 8 7"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 1 1-3.4-6.5L21 4l-1 3.6A7.9 7.9 0 0 1 21 12Z"/></symbol>
+  <symbol id="i-lightbulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.5.4.8 1 .8 1.6V16h5.4v-.5c0-.6.3-1.2.8-1.6A6 6 0 0 0 12 3Z"/></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M21 8.5 16 11v2l5 2.5v-7Z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M4 12.5 9.5 18 20 6"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></symbol>
+  <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3Z"/><path d="M8.5 8.5c-.3 1.5.3 3.3 1.8 4.8s3.3 2.1 4.8 1.8c.5-.1.9-.6.9-1.1l-.2-1.1-1.9-.9-.9.9c-.9-.4-1.9-1.4-2.3-2.3l.9-.9-.9-1.9-1.1-.2c-.5 0-1 .4-1.1.9Z"/></symbol>
+  <symbol id="i-scale" viewBox="0 0 24 24"><path d="M12 3v18M5 8l-2 6a3 3 0 0 0 6 0l-2-6Zm14 0-2 6a3 3 0 0 0 6 0l-2-6ZM5 8h14M9 21h6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
+
+<!-- ============ HEADER / NAV ============ -->
+<header class="site-header" id="top">
+  <div class="container header-inner">
+    <a href="#top" class="brand">
+      <span class="brand-mark">IA</span>
+      <span class="brand-text">
+        <strong>Insight Academy</strong>
+        <em>Learn Today, Lead Tomorrow</em>
+      </span>
+    </a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="site-nav" id="siteNav">
+      <a href="#about">About</a>
+      <a href="#subjects">Subjects</a>
+      <a href="#entrance">Entrance Prep</a>
+      <a href="#why">Why Us</a>
+      <a href="#mentor">Mentor</a>
+      <a href="#contact" class="nav-cta">Enroll Now</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="container hero-inner fade-in">
+      <p class="eyebrow">Insight Academy</p>
+      <h1>Online Classes for <span>Class 12</span></h1>
+      <p class="hero-sub">Concept-based online learning with personalized guidance.</p>
+
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-gold">Enroll Now</a>
+        <a href="tel:+918581035052" class="btn btn-outline">
+          <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call Now
+        </a>
+      </div>
+
+      <p class="hero-founder">Guided by <strong>Shafa Ashique</strong> — Future Teacher | Lifelong Learner</p>
+    </div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="section" id="about">
+    <div class="container fade-in">
+      <p class="section-tag">About Us</p>
+      <h2>A guide to serious Class 12 success</h2>
+      <p class="section-lead">
+        Insight Academy offers quality online education for Class 12 students through interactive,
+        concept-based teaching and personalized guidance — helping every learner build real understanding,
+        not just exam-ready shortcuts.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ FEATURES ============ -->
+  <section class="section alt" id="features">
+    <div class="container fade-in">
+      <p class="section-tag">What You Get</p>
+      <h2>Built for how students actually learn</h2>
+
+      <div class="grid grid-3">
+        <div class="card">
+          <svg class="icon icon-lg" aria-hidden="true"><use href="#i-lightbulb"/></svg>
+          <h3>Quality Teaching</h3>
+          <p>Clear, well-structured lessons designed for genuine understanding.</p>
+        </div>
+        <div class="card">
+          <svg class="icon icon-lg" aria-hidden="true"><use href="#i-user"/></svg>
+          <h3>Personalized Guidance</h3>
+          <p>Every student's pace and doubts are given individual attention.</p>
+        </div>
+        <div class="card">
+          <svg class="icon icon-lg" aria-hidden="true"><use href="#i-calendar"/></svg>
+          <h3>Monday–Friday Classes</h3>
+          <p>A steady, dependable weekday routine that builds momentum.</p>
+        </div>
+        <div class="card">
+          <svg class="icon icon-lg" aria-hidden="true"><use href="#i-chat"/></svg>
+          <h3>Interactive Learning</h3>
+          <p>Discussion-driven sessions, not one-way lectures.</p>
+        </div>
+        <div class="card">
+          <svg class="icon icon-lg" aria-hidden="true"><use href="#i-book"/></svg>
+          <h3>Concept-Based Teaching</h3>
+          <p>Foundations first, so answers come from understanding, not memorising.</p>
+        </div>
+        <div class="card">
+          <svg class="icon icon-lg" aria-hidden="true"><use href="#i-video"/></svg>
+          <h3>Google Meet Classes</h3>
+          <p>Simple, reliable video classes — no extra app installs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SUBJECTS ============ -->
+  <section class="section" id="subjects">
+    <div class="container fade-in">
+      <p class="section-tag">Subjects</p>
+      <h2>What's covered</h2>
+
+      <div class="grid grid-4">
+        <div class="pill-card">History</div>
+        <div class="pill-card">Political Science</div>
+        <div class="pill-card">English</div>
+        <div class="pill-card">Teaching Aptitude</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ENTRANCE PREPARATION ============ -->
+  <section class="section alt" id="entrance">
+    <div class="container fade-in">
+      <p class="section-tag">Entrance Preparation</p>
+      <h2>Ready for what comes next</h2>
+
+      <div class="grid grid-4">
+        <div class="pill-card pill-card-gold">CUSB Entrance</div>
+        <div class="pill-card pill-card-gold">Jamia Entrance</div>
+        <div class="pill-card pill-card-gold">CUET (UG)</div>
+        <div class="pill-card pill-card-gold">NCET (ITEP)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SCHEDULE ============ -->
+  <section class="section">
+    <div class="container fade-in">
+      <div class="schedule-card">
+        <div class="schedule-item">
+          <svg class="icon icon-lg" aria-hidden="true"><use href="#i-calendar"/></svg>
+          <div>
+            <p class="schedule-label">Schedule</p>
+            <p class="schedule-value">Monday to Friday</p>
+          </div>
+        </div>
+        <div class="schedule-divider"></div>
+        <div class="schedule-item">
+          <svg class="icon icon-lg" aria-hidden="true"><use href="#i-video"/></svg>
+          <div>
+            <p class="schedule-label">Platform</p>
+            <p class="schedule-value">Google Meet</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY CHOOSE US ============ -->
+  <section class="section alt" id="why">
+    <div class="container fade-in">
+      <p class="section-tag">Why Choose Us</p>
+      <h2>Five things that make the difference</h2>
+
+      <ul class="check-list">
+        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Concept Based Learning</li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Small Batch Size</li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Personal Mentorship</li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Regular Practice</li>
+        <li><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Interactive Sessions</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ MENTOR ============ -->
+  <section class="section" id="mentor">
+    <div class="container fade-in">
+      <p class="section-tag">Your Mentor</p>
+      <div class="mentor-card">
+        <div class="mentor-avatar" aria-hidden="true">SA</div>
+        <div>
+          <h3>Shafa Ashique</h3>
+          <p>Future Teacher | Lifelong Learner</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="section alt" id="contact">
+    <div class="container fade-in contact-inner">
+      <p class="section-tag">Get In Touch</p>
+      <h2>Start learning with Insight Academy</h2>
+      <p class="section-lead">Reach out directly — a real conversation, no forms.</p>
+      <p class="contact-phone">
+        <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> +91 8581035052
+      </p>
+      <div class="hero-actions">
+        <a href="tel:+918581035052" class="btn btn-gold">
+          <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg> Call
+        </a>
+        <a href="https://wa.me/918581035052" target="_blank" rel="noopener" class="btn btn-outline">
+          <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg> WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <p class="footer-brand">Insight Academy</p>
+    <p class="footer-tagline">Learn Today, Lead Tomorrow</p>
+    <p class="footer-copy">&copy; <span id="year"></span> Insight Academy. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<!-- ============ FLOATING WHATSAPP BUTTON ============ -->
+<a href="https://wa.me/918581035052" target="_blank" rel="noopener" class="float-whatsapp" aria-label="Chat on WhatsApp">
+  <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+</a>
+
+<script>
+/* ==========================================================================
+   Insight Academy — script.js
+   Vanilla JS only: mobile nav toggle + scroll fade-in + footer year.
+   ========================================================================== */
+
+// ---------- Mobile nav toggle ----------
+const navToggle = document.getElementById('navToggle');
+const siteNav = document.getElementById('siteNav');
+
+if (navToggle && siteNav) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = siteNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+
+  // Close menu after tapping a link (mobile)
+  siteNav.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      siteNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
+
+// ---------- Scroll fade-in animation ----------
+const fadeEls = document.querySelectorAll('.fade-in');
+
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+  fadeEls.forEach((el) => observer.observe(el));
+} else {
+  // Fallback: no IntersectionObserver support — show everything
+  fadeEls.forEach((el) => el.classList.add('visible'));
+}
+
+// ---------- Footer year ----------
+const yearEl = document.getElementById('year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+</script>
+</body>
+</html>
